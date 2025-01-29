@@ -1,5 +1,5 @@
 import random
-
+from django.core.paginator import Paginator
 from django.shortcuts import render
 from django.http import HttpResponse
 from task1.models import *
@@ -73,3 +73,11 @@ def sign_up_by_html(request):
             info.update({'error': "Пользователь уже существует"})
 
     return render(request, 'registration_page.html', info)
+
+
+def news_a(request):
+    news_base = News.objects.all()
+    paginator = Paginator(news_base, 3)
+    page_number = request.GET.get('page')
+    news = paginator.get_page(page_number)
+    return render(request, 'news.html', {'news': news})

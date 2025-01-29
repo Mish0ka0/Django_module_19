@@ -20,3 +20,10 @@ class BuyerAdmin(admin.ModelAdmin):
     list_per_page = 30
     readonly_fields = ('balance',)
 
+
+@admin.register(News)
+class NewsAdmin(admin.ModelAdmin):
+    list_display = ('title', 'content')
+    list_filter = ('title',)
+    search_fields = ('title',)
+    readonly_fields = ('date',)
